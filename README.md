@@ -1,6 +1,4 @@
 # Atmega8A-PU
-![](https://photos05.redcart.pl/templates/images/description/995/Image/kuba/21/Mikrokontroler_AVR_ATmega8A-PU.jpg) 
-
 
 ## avrdude
 ```
@@ -27,7 +25,11 @@ Current state: ```Fuses OK (E:FF, H:D9, L:FF)```
 
 ## Resources
 [ATmega8A - Complete Datasheet](http://ww1.microchip.com/downloads/en/DeviceDoc/Microchip%208bit%20mcu%20AVR%20ATmega8A%20data%20sheet%2040001974A.pdf)
+http://www.microchip.com/wwwproducts/en/atmega8a
+
+https://www.avrprogrammers.com/atmega/atmega8
+
+http://hobby.abxyz.bplaced.net/index.php?pid=4&aid=2
 
 https://www.rototron.info/raspberry-pi-avr-programmer-spi-tutorial/  
 http://www.circuitstoday.com/how_to_work_with_32k_crystal_and_avr_microcontroller  
-http://www.microchip.com/wwwproducts/en/atmega8a

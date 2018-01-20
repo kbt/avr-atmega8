@@ -1,11 +1,10 @@
-# https://de.wikibooks.org/wiki/C-Programmierung_mit_AVR-GCC/_Hello_World
-
-
 CFLAGS=-DF_CPU=16000000UL
+MCU=-mmcu=atmega8a
 
-all:
-	avr-gcc -mmcu=atmega8a $(CFLAGS) -Os -c blink.c -o blink.o
-	avr-gcc blink.o -o blink.elf
+compile:
+	# https://de.wikibooks.org/wiki/C-Programmierung_mit_AVR-GCC/_Hello_World
+	avr-gcc $(MCU) $(CFLAGS) -Os -c blink.c -o blink.o
+	avr-gcc $(MCU) blink.o -o blink.elf
 	avr-objcopy -O ihex -j .text -j .data blink.elf blink.hex
 
 clean:

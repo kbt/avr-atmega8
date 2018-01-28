@@ -1,36 +1,42 @@
 #include <avr/io.h>
 #include <util/delay.h>
+#include <avr/interrupt.h>
+
+#define SET_BIT(x,y) (x|=(1<<y))
+#define XOR_BIT(x,y) (x^=(1<<y))
 
 int is_set(int port, int pin) {
   return (port & (1 << pin)) > 0;
+}
+
+ISR(INT0_vect)
+{
+  cli();
+  XOR_BIT(PORTC,PC5); 
+
+  //TODO use timers instead of delay
+  _delay_ms(200);
+  sei();
 }
 
 int main(void) {
   DDRC = 0xff;
   PORTC = (1 << PC4);
 
-  // pull-up vcc to a switcher (Pxy is an INPUT by default)
-  PORTD |= (1 << PD0);
+  SET_BIT(MCUCR, ISC11);
+  
+  // Turns on INT0
+  SET_BIT(GICR, INT0);
 
-  int mode = 0;
+  // pull-up vcc to a switcher (Pxy is an INPUT by default)
+  PORTD |= (1 << PD2);
+
+  sei();
+
   int c1 = 0, c2 = 0;
   while (1) {
-    c1 = c2;
-    c2 = is_set(PIND, PD0);
+    PORTC ^= (1 << PC4);
 
-    // when clicked
-    if (c2 == 1 && c1 == 0) {
-      mode = (mode + 1) % 2;
-
-      if (mode == 0) {
-        PORTC |= (1 << PC4) | (1 << PC5);
-      } else if (mode == 1) {
-        PORTC = (1 << PC4);
-      }
-    }
-
-    PORTC ^= 0xff;
-
-    _delay_ms(150);
+    _delay_ms(200);
   }
 }
